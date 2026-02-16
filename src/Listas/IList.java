@@ -1,4 +1,9 @@
 package Listas;
-public class IList {
-    
+
+public interface IList<T> {
+    void add(T element);
+    T removeLast();
+    T getLast();
+    boolean isEmpty();
+    int size();
 }

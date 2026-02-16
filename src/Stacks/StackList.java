@@ -1,17 +1,18 @@
 package Stacks;
-import java.util.Vector;
 
-public class VectorStack<T> implements IStack<T> {
+import Listas.IList;
 
-    private Vector<T> vector;
+public class StackList<T> implements IStack<T> {
 
-    public VectorStack() {
-        vector = new Vector<>();
+    private IList<T> list;
+
+    public StackList(IList<T> listImplementation) {
+        this.list = listImplementation;
     }
 
     @Override
     public void push(T element) {
-        vector.add(element);
+        list.add(element);
     }
 
     @Override
@@ -19,7 +20,7 @@ public class VectorStack<T> implements IStack<T> {
         if (isEmpty()) {
             throw new RuntimeException("Stack vacío");
         }
-        return vector.remove(vector.size() - 1);
+        return list.removeLast();
     }
 
     @Override
@@ -27,16 +28,16 @@ public class VectorStack<T> implements IStack<T> {
         if (isEmpty()) {
             throw new RuntimeException("Stack vacío");
         }
-        return vector.get(vector.size() - 1);
+        return list.getLast();
     }
 
     @Override
     public boolean isEmpty() {
-        return vector.isEmpty();
+        return list.isEmpty();
     }
 
     @Override
     public int size() {
-        return vector.size();
+        return list.size();
     }
 }
