@@ -3,6 +3,7 @@ package Listas;
 public class ListaEncadenadaDoble<T> implements IList<T> {
 
     private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     private static class Node<T> {
@@ -12,63 +13,57 @@ public class ListaEncadenadaDoble<T> implements IList<T> {
 
         Node(T data) {
             this.data = data;
-            this.next = null;
-            this.prev = null;
         }
     }
 
     public ListaEncadenadaDoble() {
-        this.head = null;
-        this.size = 0;
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override
-    public void add(T element) {
+    public void addLast(T element) {
+
         Node<T> newNode = new Node<>(element);
-        if (head == null) {
-            head = newNode;
+
+        if (size == 0) {
+            head = tail = newNode;
         } else {
-            Node<T> current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
-            newNode.prev = current;
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
         }
+
         size++;
     }
 
     @Override
     public T removeLast() {
-        if (isEmpty()) {
-            throw new RuntimeException("Lista vacia");
+
+        if (size == 0)
+            throw new RuntimeException("Lista vacía");
+
+        T data = tail.data;
+
+        if (size == 1) {
+            head = tail = null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
         }
-        if (head.next == null) {
-            T data = head.data;
-            head = null;
-            size--;
-            return data;
-        }
-        Node<T> current = head;
-        while (current.next != null) {
-            current = current.next;
-        }
-        T data = current.data;
-        current.prev.next = null;
+
         size--;
         return data;
     }
 
     @Override
     public T getLast() {
-        if (isEmpty()) {
-            throw new RuntimeException("Lista vacia");
-        }
-        Node<T> current = head;
-        while (current.next != null) {
-            current = current.next;
-        }
-        return current.data;
+
+        if (size == 0)
+            throw new RuntimeException("Lista vacía");
+
+        return tail.data;
     }
 
     @Override

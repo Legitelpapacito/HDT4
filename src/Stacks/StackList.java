@@ -2,21 +2,21 @@ package Stacks;
 
 import Listas.IList;
 
-public class StackList<T> implements IStack<T> {
+public class StackList<E> implements IStack<E> {
 
-    private IList<T> list;
+    private IList<E> list;
 
-    public StackList(IList<T> listImplementation) {
-        this.list = listImplementation;
+    public StackList(IList<E> list) {
+        this.list = list;
     }
 
     @Override
-    public void push(T element) {
-        list.add(element);
+    public void push(E item) {
+        list.add(item);
     }
 
     @Override
-    public T pop() {
+    public E pop() {
         if (isEmpty()) {
             throw new RuntimeException("Stack vacío");
         }
@@ -24,7 +24,7 @@ public class StackList<T> implements IStack<T> {
     }
 
     @Override
-    public T peek() {
+    public E peek() {
         if (isEmpty()) {
             throw new RuntimeException("Stack vacío");
         }
@@ -36,6 +36,7 @@ public class StackList<T> implements IStack<T> {
         return list.isEmpty();
     }
 
+    // 🔥 ESTE ES EL QUE FALTABA
     @Override
     public int size() {
         return list.size();

@@ -6,4 +6,5 @@ public interface IList<T> {
     T getLast();
     boolean isEmpty();
     int size();
+    void addLast(T item);
 }

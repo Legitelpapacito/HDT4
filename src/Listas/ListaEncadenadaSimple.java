@@ -11,7 +11,6 @@ public class ListaEncadenadaSimple<T> implements IList<T> {
 
         Node(T data) {
             this.data = data;
-            this.next = null;
         }
     }
 
@@ -21,7 +20,8 @@ public class ListaEncadenadaSimple<T> implements IList<T> {
     }
 
     @Override
-    public void add(T element) {
+    public void addLast(T element) {
+
         Node<T> newNode = new Node<>(element);
 
         if (head == null) {
@@ -38,9 +38,9 @@ public class ListaEncadenadaSimple<T> implements IList<T> {
 
     @Override
     public T removeLast() {
-        if (head == null) {
+
+        if (isEmpty())
             throw new RuntimeException("Lista vacía");
-        }
 
         if (head.next == null) {
             T data = head.data;
@@ -62,9 +62,9 @@ public class ListaEncadenadaSimple<T> implements IList<T> {
 
     @Override
     public T getLast() {
-        if (head == null) {
+
+        if (isEmpty())
             throw new RuntimeException("Lista vacía");
-        }
 
         Node<T> temp = head;
         while (temp.next != null) {
@@ -83,4 +83,21 @@ public class ListaEncadenadaSimple<T> implements IList<T> {
     public int size() {
         return size;
     }
+
+    @Override
+public void add(T element) {
+
+    Node<T> newNode = new Node<>(element);
+
+    if (head == null) {
+        head = newNode;
+    } else {
+        Node<T> temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+    size++;
+}
 }
